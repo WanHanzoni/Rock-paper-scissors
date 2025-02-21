@@ -1,0 +1,47 @@
+* {
+    background-color: rgb(110, 24, 110);
+    color: rgb(217, 221, 0);
+    font-family: monospace;
+}
+
+div {
+    font-size: 2rem;
+    white-space: pre-line;
+    text-align: center;
+    line-height: 4rem;
+}
+
+#gameMessage {
+    position: absolute;
+    font-size: 3rem;
+    bottom: 30vh;
+    justify-self: anchor-center;
+}
+
+
+#containerButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#containerScores {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 4rem;
+}
+
+
+button {
+    flex: 1;
+    padding: 1vw;
+    box-shadow: 1vw solid grey;
+    text-shadow: 1rem red;
+}
+
+#reset {
+    align-self: flex-start;
+    flex: 0 1 0%;
+}

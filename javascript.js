@@ -1,39 +1,65 @@
-let hand = ["rock", "paper", "scissors"]
+const containerButtons = document.querySelector("#containerButtons");
+const containerScores = document.querySelector("#containerScores");
+const containerComments = document.querySelector("#containerComments");
+const scoreHuman = containerScores.querySelector("#scoreHuman");
+const scoreComputer = containerScores.querySelector("#scoreComputer");
+const gameMessage = containerComments.querySelector("#gameMessage");
+let humanScore = 0
+let computerScore = 0
+let hand = ["Rock", "Paper", "Scissors"]
+let buttons = document.querySelectorAll("button");
 
 function getComputerChoice() {
     var computerChoice = Math.random() * 10 % 3;
     return computerChoice.toString()[0];
 }
 
-function getHumanChoice() {
-    var humanChoice = prompt("Choose Rock, Paper or Scissors").toLocaleLowerCase();
-    return hand.indexOf(humanChoice);
+function buttonPressed() {
+    buttons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            if (humanScore == 5 || computerScore == 5) {
+                reset();
+            } else {
+                let buttonPressed = event.target.textContent;
+                humanSelection = hand.indexOf(buttonPressed);
+                console.log(buttonPressed);
+                if (buttonPressed !== "Reset") {
+                    playRound();
+                } else {
+                    reset();
+                }
+            };
+        })
+    })
 }
-
-let humanScore = 0
-let computerScore = 0
-
 function playRound() {
-    do {
-        var humanSelection = getHumanChoice()
-        var computerSelection = getComputerChoice()
 
-        console.log("Human plays: " + hand[humanSelection]);
-        console.log("Computer plays: " + hand[computerSelection]);
+    var computerSelection = getComputerChoice()
 
-        if (humanSelection - computerSelection == -2 || humanSelection - computerSelection == 1) {
-            humanScore = humanScore + 1
-            alert("Un punto para ti Crack!\nYo: " + humanScore + "\nMáquina: " + computerScore)
-        } else if (humanSelection - computerSelection == 2 || humanSelection - computerSelection == -1) {
-            computerScore = computerScore + 1
-            alert("Te va a ganar una máquina Manco!\nYo: " + humanScore + "\nMáquina: " + computerScore)
-        } else if (humanSelection == computerSelection) {
-            alert("Empate\nYo: " + humanScore + "\nMáquina: " + computerScore);
-        }
-
-    } while (humanScore < 5 && computerScore < 5) {
-        alert("Se acabó la partida... \nPuntuación: \n" + "Máquina: " + computerScore + "\nCrack: " + humanScore);
+    if (humanSelection - computerSelection == -2 || humanSelection - computerSelection == 1) {
+        humanScore = humanScore + 1
+        gameMessage.textContent = "Un punto para ti Crack!";
+    } else if (humanSelection - computerSelection == 2 || humanSelection - computerSelection == -1) {
+        computerScore = computerScore + 1
+        gameMessage.textContent = "Te va a ganar una máquina Manco!";
+    } else if (humanSelection == computerSelection) {
+        gameMessage.textContent = "Empate... Prueba otra vez... ";
     }
+    if (humanScore == 5 || computerScore == 5) {
+        gameMessage.textContent = "Se acabó la partida... ";
+        document.documentElement.style.filter = "invert(1)";
+
+    }
+
+    scoreHuman.textContent = humanScore + "\nMi puntuación";
+    containerScores.appendChild(scoreHuman);
+    scoreComputer.textContent = computerScore + "\nEnemigo";
+    containerScores.appendChild(scoreComputer);
+    containerComments.append(gameMessage);
 }
 
-playRound();
+function reset() {
+    location.reload();
+}
+
+buttonPressed();
