@@ -1,22 +1,5 @@
 function getComputerChoice() {
-    return Math.random();
-}
-
-
-function getHumanChoice() {
-    return prompt().toLocaleLowerCase();
-}
-
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-let humanScore = 0
-let computerScore = 0
-
-
-function playRound(humanChoice, computerChoice) {
-
-    computerChoice = computerSelection * 10 % 3
+    var computerChoice = Math.random() * 10 % 3;
 
     if (computerChoice <= 1) {
         computerChoice = "rock"
@@ -27,16 +10,40 @@ function playRound(humanChoice, computerChoice) {
     if (computerChoice <= 3) {
         computerChoice = "scissors"
     }
+    return computerChoice;
+}
 
-    console.log("Human plays: " + humanSelection)
-    console.log("Computer plays: " + computerChoice)
 
-    if (computerChoice == "rock" && humanChoice == "scissors") {
-        computerScore + 1;
-        // playRound();
+function getHumanChoice() {
+    var humanChoice = prompt().toLocaleLowerCase();
+    return humanChoice;
+}
+
+
+let humanScore = 0
+let computerScore = 0
+
+
+function playRound() {
+    var humanSelection = getHumanChoice()
+    var computerSelection = getComputerChoice()
+
+    console.log("Human plays: " + humanSelection);
+    console.log("Computer plays: " + computerSelection);
+
+    if (computerSelection == humanSelection) {
+        // playRound(humanSelection, computerSelection);
+        alert("Empate");
+        playRound();
+    }
+
+    if (computerSelection == "scissors" && humanSelection == "rock") {
+        humanScore = humanScore + 1;
+        alert("Un punto para ti Crack! " + humanScore);
+        playRound();
     }
 }
 
-playRound(humanSelection, computerSelection)
+playRound();
 
 
