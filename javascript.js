@@ -14,32 +14,25 @@ let humanScore = 0
 let computerScore = 0
 
 function playRound() {
+    do {
+        var humanSelection = getHumanChoice()
+        var computerSelection = getComputerChoice()
 
-    var humanSelection = getHumanChoice()
-    var computerSelection = getComputerChoice()
+        console.log("Human plays: " + hand[humanSelection]);
+        console.log("Computer plays: " + hand[computerSelection]);
 
-    console.log("Human plays: " + hand[humanSelection]);
-    console.log("Computer plays: " + hand[computerSelection] + computerSelection);
+        if (humanSelection - computerSelection == -2 || humanSelection - computerSelection == 1) {
+            humanScore = humanScore + 1
+            alert("Un punto para ti Crack!\nYo: " + humanScore + "\nMáquina: " + computerScore)
+        } else if (humanSelection - computerSelection == 2 || humanSelection - computerSelection == -1) {
+            computerScore = computerScore + 1
+            alert("Te va a ganar una máquina Manco!\nYo: " + humanScore + "\nMáquina: " + computerScore)
+        } else if (humanSelection == computerSelection) {
+            alert("Empate\nYo: " + humanScore + "\nMáquina: " + computerScore);
+        }
 
-    if (humanSelection - computerSelection == -2 || humanSelection - computerSelection == 1) {
-        humanScore = humanScore + 1
-        alert("Un punto para ti Crack!\nYo: " + humanScore + "\nMáquina: " + computerScore)
-        final()
-    } else if (humanSelection - computerSelection == 2 || humanSelection - computerSelection == -1) {
-        computerScore = computerScore + 1
-        alert("Te va a ganar una máquina Manco!\nYo: " + humanScore + "\nMáquina: " + computerScore)
-        final()
-    } else if (humanSelection == computerSelection) {
-        alert("Empate\nYo: " + humanScore + "\nMáquina: " + computerScore);
-        final()
-    }
-}
-
-function final() {
-    if (humanScore == 5 || computerScore == 5) {
+    } while (humanScore < 5 && computerScore < 5) {
         alert("Se acabó la partida... \nPuntuación: \n" + "Máquina: " + computerScore + "\nCrack: " + humanScore);
-    } else {
-        playRound();
     }
 }
 
